@@ -11,14 +11,6 @@ import { useSpeechSynthesis } from "react-speech-kit";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const speakSound = (text) => {
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 0.8;
-  utterance.pitch = 0.8;
-  utterance.volume = 1;
-  speechSynthesis.speak(utterance);
-};
-
 export default function CameraView() {
   const camera = useRef(null);
   const [numberOfCameras, setNumberOfCameras] = useState(0);
@@ -52,7 +44,11 @@ export default function CameraView() {
       // console.log(voices[30]);
       // speak({ text: data.answer, voice: voices[30] });
 
-      speakSound(data.answer);
+      if ("speechSynthesis" in window) {
+        console.log("Speech Synthesis is supported 🎉");
+      } else {
+        console.log("Speech Synthesis is not Supported 😞 ");
+      }
       //speak({ text: data.answer });
       setLoading(false);
       return data;
