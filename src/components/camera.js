@@ -22,7 +22,7 @@ export default function CameraView() {
 
   const { speak, voices } = useSpeechSynthesis();
 
-  // console.log(voices[145]);
+  console.log(voices);
 
   useEffect(() => {
     const fetchData = async (output) => {
@@ -38,7 +38,7 @@ export default function CameraView() {
 
       const data = await res.json();
       console.log(data.answer);
-      speak({ text: data.answer, voice: voices[145] });
+      speak({ text: data.answer, voice: voices[30] });
       setLoading(false);
       return data;
     };
