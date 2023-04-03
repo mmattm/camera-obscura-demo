@@ -39,6 +39,7 @@ export default function CameraView() {
       const data = await res.json();
       console.log(data.answer);
       speak({ text: data.answer, voice: voices[145] });
+      setLoading(false);
       return data;
     };
 
