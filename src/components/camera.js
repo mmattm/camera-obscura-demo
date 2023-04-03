@@ -11,10 +11,12 @@ import { useSpeechSynthesis } from "react-speech-kit";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const textToSpeach = (message) => {
-  const speach = new SpeechSynthesisUtterance(message);
-  [speach.voice] = speechSynthesis.getVoices();
-  speechSynthesis.speak(speach);
+const speakSound = (text) => {
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 0.8;
+  utterance.pitch = 0.8;
+  utterance.volume = 1;
+  speechSynthesis.speak(utterance);
 };
 
 export default function CameraView() {
@@ -50,8 +52,8 @@ export default function CameraView() {
       // console.log(voices[30]);
       // speak({ text: data.answer, voice: voices[30] });
 
+      speakSound(data.answer);
       //speak({ text: data.answer });
-      textToSpeach(data.answer);
       setLoading(false);
       return data;
     };
@@ -98,6 +100,7 @@ export default function CameraView() {
         return;
       }
       setPrediction(prediction);
+      //getChatGpt();
     }
   };
 
