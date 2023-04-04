@@ -135,7 +135,7 @@ export default function CameraView() {
             className={classnames(
               "w-20 h-20 rounded-full hover:bg-red-500 flex text-black hover:text-white justify-center align-center transition-all items-center no-border",
               loading && "bg-red-500 animate-ping",
-              !loading && "bg-white"
+              !loading && "bg-white active:bg-white"
             )}
           >
             {/* <CameraIcon className="h-14 w-14" /> */}
