@@ -22,6 +22,8 @@ export default function CameraView() {
 
   const { speak, voices } = useSpeechSynthesis();
 
+  const [startSpeak, setStartSpeak] = useState(false);
+
   const speakSound = (answer) => {
     let voice = voices.find((o) => o.name === "Eddy" && o.lang === "en-US");
     speak({ text: answer, voice: voice });
@@ -55,6 +57,9 @@ export default function CameraView() {
       //   console.log("Speech Synthesis is not Supported 😞 ");
       // }
       //speak({ text: data.answer });
+      // let voice = voices.find((o) => o.name === "Eddy" && o.lang === "en-US");
+      // speak({ text: answer, voice: voice });
+      setStartSpeak(true);
       setLoading(false);
       return data;
     };
@@ -68,6 +73,13 @@ export default function CameraView() {
       console.log("Prediction still loading...");
     }
   }, [prediction]);
+
+  useEffect(() => {
+    if (startSpeak) {
+      let voice = voices.find((o) => o.name === "Eddy" && o.lang === "en-US");
+      speak({ text: "This is a test", voice: voice });
+    }
+  }, [startSpeak]);
 
   const getPrediction = async () => {
     console.log("getPrediction");
