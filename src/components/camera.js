@@ -153,7 +153,7 @@ export default function CameraView() {
             disabled={numberOfCameras <= 1}
             className="no-border"
             onClick={() => {
-              //camera.current.switchCamera();
+              camera.current.switchCamera();
               speakSound("Switching camera");
             }}
           >
