@@ -22,10 +22,10 @@ export default function CameraView() {
 
   const { speak, voices } = useSpeechSynthesis();
 
-  // useEffect(() => {
-  //   console.log("camera is loaded");
-  //   console.log(voices);
-  // }, [voices]);
+  useEffect(() => {
+    console.log("camera is loaded");
+    console.log(voices);
+  }, [voices]);
 
   useEffect(() => {
     const fetchData = async (output) => {
@@ -42,13 +42,15 @@ export default function CameraView() {
       const data = await res.json();
       console.log(data.answer);
       // console.log(voices[30]);
-      speak({ text: data.answer });
+      let voice = voices.find((o) => o.name === "Eddy" && o.lang === "en-US");
 
-      if ("speechSynthesis" in window) {
-        console.log("Speech Synthesis is supported 🎉");
-      } else {
-        console.log("Speech Synthesis is not Supported 😞 ");
-      }
+      speak({ text: data.answer, voice: voice });
+
+      // if ("speechSynthesis" in window) {
+      //   console.log("Speech Synthesis is supported 🎉");
+      // } else {
+      //   console.log("Speech Synthesis is not Supported 😞 ");
+      // }
       //speak({ text: data.answer });
       setLoading(false);
       return data;
