@@ -22,13 +22,11 @@ export default function CameraView() {
 
   const { speak, voices } = useSpeechSynthesis();
 
-  const [startSpeak, setStartSpeak] = useState(false);
-
   const [voice, setVoice] = useState(null);
 
-  const speakSound = (answer) => {
+  const speakSound = (text) => {
     let voice = voices.find((o) => o.name === "Eddy" && o.lang === "en-US");
-    speak({ text: answer, voice: voice });
+    speak({ text: text, voice: voice });
   };
 
   useEffect(() => {
@@ -53,7 +51,7 @@ export default function CameraView() {
       const data = await res.json();
       console.log(data.answer);
       // console.log(voices[30]);
-      //speakSound(data.answer);
+      speakSound(data.answer);
 
       // if ("speechSynthesis" in window) {
       //   console.log("Speech Synthesis is supported 🎉");
@@ -77,12 +75,6 @@ export default function CameraView() {
       console.log("Prediction still loading...");
     }
   }, [prediction]);
-
-  useEffect(() => {
-    if (startSpeak) {
-      speak({ text: "This is a test", voice: voice });
-    }
-  }, [startSpeak]);
 
   const getPrediction = async () => {
     console.log("getPrediction");
@@ -144,8 +136,8 @@ export default function CameraView() {
           </button> */}
         </div>
         <div className="flex-1 justify-center flex">
-          <button
-            onClick={() => speak({ text: "test", voice: voice })}
+          <buttonwqqw
+            onClick={handleClick}
             disabled={loading}
             className={classnames(
               "w-20 h-20 rounded-full flex text-black hover:text-white justify-center align-center transition-all items-center no-border",
@@ -154,14 +146,15 @@ export default function CameraView() {
             )}
           >
             {/* <CameraIcon className="h-14 w-14" /> */}
-          </button>
+          </buttonwqqw>
         </div>
         <div className="flex align-items">
           <button
             disabled={numberOfCameras <= 1}
             className="no-border"
             onClick={() => {
-              camera.current.switchCamera();
+              //camera.current.switchCamera();
+              speakSound("Switching camera");
             }}
           >
             <ArrowPathIcon className="h-10 w-10 text-white " />
