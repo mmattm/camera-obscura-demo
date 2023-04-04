@@ -57,9 +57,9 @@ export default function CameraView() {
       //   console.log("Speech Synthesis is not Supported 😞 ");
       // }
       //speak({ text: data.answer });
-      // let voice = voices.find((o) => o.name === "Eddy" && o.lang === "en-US");
-      // speak({ text: answer, voice: voice });
-      setStartSpeak(true);
+      let voice = voices.find((o) => o.name === "Eddy" && o.lang === "en-US");
+      speak({ text: data.answer, voice: voice });
+      //setStartSpeak(true);
       setLoading(false);
       return data;
     };
@@ -72,7 +72,7 @@ export default function CameraView() {
     } else {
       console.log("Prediction still loading...");
     }
-  }, [prediction]);
+  }, [prediction, speak, voices]);
 
   useEffect(() => {
     if (startSpeak) {
