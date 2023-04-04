@@ -133,9 +133,9 @@ export default function CameraView() {
             onClick={handleClick}
             disabled={loading}
             className={classnames(
-              "w-20 h-20 rounded-full hover:bg-red-500 flex text-black hover:text-white justify-center align-center transition-all items-center no-border",
+              "w-20 h-20 rounded-full flex text-black hover:text-white justify-center align-center transition-all items-center no-border",
               loading && "bg-red-500 animate-ping",
-              !loading && "bg-white active:bg-white"
+              !loading && "bg-white"
             )}
           >
             {/* <CameraIcon className="h-14 w-14" /> */}
