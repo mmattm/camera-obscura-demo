@@ -47,7 +47,7 @@ export default function CameraView() {
       const data = await res.json();
       console.log(data.answer);
       // console.log(voices[30]);
-      speakSound(data.answer);
+      //speakSound(data.answer);
 
       // if ("speechSynthesis" in window) {
       //   console.log("Speech Synthesis is supported 🎉");
