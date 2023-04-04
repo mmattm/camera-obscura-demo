@@ -24,14 +24,18 @@ export default function CameraView() {
 
   const [startSpeak, setStartSpeak] = useState(false);
 
+  const [voice, setVoice] = useState(null);
+
   const speakSound = (answer) => {
     let voice = voices.find((o) => o.name === "Eddy" && o.lang === "en-US");
     speak({ text: answer, voice: voice });
   };
 
   useEffect(() => {
-    console.log("camera is loaded");
+    console.log("Voices are loaded");
     console.log(voices);
+    let voice = voices.find((o) => o.name === "Eddy" && o.lang === "en-US");
+    setVoice(voice);
   }, [voices]);
 
   useEffect(() => {
@@ -57,8 +61,8 @@ export default function CameraView() {
       //   console.log("Speech Synthesis is not Supported 😞 ");
       // }
       //speak({ text: data.answer });
-      let voice = voices.find((o) => o.name === "Eddy" && o.lang === "en-US");
-      speak({ text: data.answer, voice: voice });
+      // let voice = voices.find((o) => o.name === "Eddy" && o.lang === "en-US");
+      // speak({ text: data.answer, voice: voice });
       //setStartSpeak(true);
       setLoading(false);
       return data;
@@ -72,11 +76,10 @@ export default function CameraView() {
     } else {
       console.log("Prediction still loading...");
     }
-  }, [prediction, speak, voices]);
+  }, [prediction]);
 
   useEffect(() => {
     if (startSpeak) {
-      let voice = voices.find((o) => o.name === "Eddy" && o.lang === "en-US");
       speak({ text: "This is a test", voice: voice });
     }
   }, [startSpeak]);
@@ -142,7 +145,7 @@ export default function CameraView() {
         </div>
         <div className="flex-1 justify-center flex">
           <button
-            onClick={handleClick}
+            onClick={() => speak({ text: "test", voice: voice })}
             disabled={loading}
             className={classnames(
               "w-20 h-20 rounded-full flex text-black hover:text-white justify-center align-center transition-all items-center no-border",
